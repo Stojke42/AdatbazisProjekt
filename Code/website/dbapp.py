@@ -1,4 +1,5 @@
 import mysql.connector
+from .models import User
 
 
 def conect_to_db():
@@ -89,15 +90,62 @@ def loginuser(email):
         mycursor = mydb.cursor()
         sql = f"SELECT * FROM `users` WHERE `users`.`email` = '{email}';"
         mycursor.execute(sql)
-        myresults=mycursor.fetchall()
-        print(len(myresults))
+        myresults = mycursor.fetchall()
+
         if (len(myresults)) == 0:
-            print("dibije false")
+
             return False
         else:
             user = {"email": myresults[0][0], "firstname": myresults[0][1],
                     "password": myresults[0][2]}
             return user
+
+    except:
+        print("Nincs DB")
+        return False
+
+
+def backuser(email):
+    try:  # ha nincs db vagy nem sikerul csatlakozni akor except
+        mydb = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            database="famtree"
+
+        )
+
+        mycursor = mydb.cursor()
+        sql = f"SELECT * FROM `users` WHERE `users`.`email` = '{email}';"
+        mycursor.execute(sql)
+        myresults = mycursor.fetchall()
+
+        if (len(myresults)) == 0:
+
+            return False
+        else:
+            user = User(myresults[0][0], myresults[0][1], myresults[0][2])
+            return user
+
+    except:
+        print("Nincs DB")
+        return False
+
+
+def listperson():
+    try:  # ha nincs db vagy nem sikerul csatlakozni akor except
+        mydb = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            database="famtree"
+
+        )
+
+        mycursor = mydb.cursor()
+        sql = f"SELECT * FROM `Person` where `dateofdeth` is null order by `dateofbirth` asc;"
+        mycursor.execute(sql)
+        myresults = mycursor.fetchall()
+
+        return myresults
 
     except:
         print("Nincs DB")

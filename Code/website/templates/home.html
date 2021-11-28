@@ -1,6 +1,78 @@
 {% extends "base.html" %}
+
 {% block title %}Home{% endblock %}
 
 {% block content%}
-<h1>this is homepage</h1>
+
+<br>
+<form method="POST">
+    <br>
+    <h3 align="center">Event list by person</h3>
+	<div class="form-group">
+      <label for="sel1">Select person (select one):</label>
+      <select class="form-control" id="sel1" name="person">
+		{%for j in listofperson%}
+        <option>{{j}}</option>
+        {%endfor%}
+      </select>
+      <br>
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-primary">List events</button>
+</form>
+<br>
+<div class="tree">
+	<ul>
+		<li>
+			<a href="#">Parent</a>
+			<ul>
+				<li>
+					<a href="#">Child</a>
+					<ul>
+						<li>
+							<a href="#">Grand Child</a>
+						</li>
+						<li>
+							<a href="#">Grand Child</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">Child</a>
+					<ul>
+						<li><a href="#">Grand Child</a>
+							<ul>
+								<li>
+									<a href="#">Great Grand Child</a>
+								</li>
+								<li>
+									<a href="#">Great Grand Child</a>
+								</li>
+								<li>
+									<a href="#">Great Grand Child</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">Grand Child</a>
+							<ul>
+								<li>
+									<a href="#">Great Grand Child</a>
+								</li>
+								<li>
+									<a href="#">Great Grand Child</a>
+								</li>
+								<li>
+									<a href="#">Great Grand Child</a>
+								</li>
+							</ul>
+						</li>
+						<li><a href="#">Grand Child</a></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
 {% endblock %}
