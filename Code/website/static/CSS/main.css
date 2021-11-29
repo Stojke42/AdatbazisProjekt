@@ -1,5 +1,13 @@
 * {margin: 0; padding: 0;}
+.tree{
 
+	padding-bottom: 250px;
+	display: flex;
+  	justify-content: center;
+}
+.mainul{
+
+}
 .tree ul {
 	padding-top: 20px; position: relative;
 
@@ -73,7 +81,7 @@ right connector from last child*/
 	text-decoration: none;
 	color: #666;
 	font-family: arial, verdana, tahoma;
-	font-size: 11px;
+	font-size: 15px;
 	display: inline-block;
 
 	border-radius: 5px;
@@ -96,7 +104,4 @@ right connector from last child*/
 .tree li a:hover+ul::before,
 .tree li a:hover+ul ul::before{
 	border-color:  #94a0b4;
-}
-h1{
-	color: crimson;
 }
