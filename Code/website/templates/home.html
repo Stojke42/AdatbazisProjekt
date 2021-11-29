@@ -1,0 +1,425 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content%}
+<br>
+<form method="POST">
+    <br>
+    <h3 align="center">Addi person</h3>
+	<div class="form-group">
+        <label for="personname">Person name</label>
+        <input
+        type="text"
+        class="form-control"
+        id="personname"
+        name="personname"
+        placeholder="Enter event name"
+        />
+    </div>
+	<div class="form-group">
+      <label for="sel1">Select father</label>
+      <select class="form-control" name="fatherperson">
+		  <option value="" disabled selected hidden>Choose person</option>
+		  {%for j in listofperson%}
+		  <option>{{j}}</option>
+		  {%endfor%}
+      </select>
+    </div>
+	<div class="form-group">
+      <label for="sel1">Select mother person</label>
+      <select class="form-control" name="motherperson">
+		  <option value="" disabled selected hidden>Choose person</option>
+		  {%for j in listofperson%}
+		  <option>{{j}}</option>
+		  {%endfor%}
+      </select>
+    </div>
+	<div class="form-group">
+        <label for="dateofbirth">Date of birth</label>
+        <input
+        type="date"
+        class="form-control"
+        id="dateofbirth"
+        name="dateofbirth"
+        />
+    </div>
+	<div class="form-check">
+	  <input class="form-check-input" type="radio" name="gender" id="gender1" checked value="Male">
+	  <label class="form-check-label" for="gender1">
+		Male
+	  </label>
+	</div>
+	<div class="form-check">
+	  <input class="form-check-input" type="radio" name="gender" id="gender2" value="Female">
+	  <label class="form-check-label" for="gender2" >
+		Female
+	  </label>
+	</div>
+    <br/>
+    <button type="submit"  name="addperson" value="addperson" class="btn btn-primary">Add person</button>
+</form>
+<!-- -----------------------------------------------ADD PERSON------------------------------------------------------ -->
+<h3 align="center">Alive person in databese</h3>
+  <div class=>
+  			<div class="container">
+				<p class="lead">Male : {{alivepersonstat["Male"]}}</p>
+    			<p class="lead">Female : {{alivepersonstat["Female"]}}</p>
+  			</div>
+		</div>
+<br>
+
+<!-- -----------------------------------------------NEXT WEDDING PARTY------------------------------------------------------ -->
+<br>
+<form method="POST">
+    <br>
+    <h3 align="center">Create event </h3>
+	<div class="form-group">
+      <label for="sel1">Event by:</label>
+      <select class="form-control" name="eventbyperson">
+		  <option value="" disabled selected hidden>Choose person</option>
+		  {%for j in listofperson%}
+		  <option>{{j}}</option>
+		  {%endfor%}
+      </select>
+    </div>
+	<div class="form-group">
+        <label for="event_date">Event date</label>
+        <input
+        type="date"
+        class="form-control"
+        id="event_date"
+        name="event_date"
+        />
+    </div>
+	<div class="form-group">
+        <label for="event_name">Event name</label>
+        <input
+        type="text"
+        class="form-control"
+        id="event_name"
+        name="event_name"
+        placeholder="Enter event name"
+        />
+    </div>
+    <br/>
+    <button type="submit"  name="create_event" value="create_event" class="btn btn-primary">Create</button>
+</form>
+<!-- -------------------------------------------CREATE EVENT---------------------------------------------------------- -->
+<br>
+<form method="POST">
+    <br>
+    <h3 align="center">Event list by person</h3>
+	<div class="form-group">
+      <label for="sel1">Select person (select one):</label>
+      <select class="form-control" id="sel1" name="person">
+		  <option value="" disabled selected hidden>Choose person</option>
+		{%for j in listofperson%}
+        <option>{{j}}</option>
+        {%endfor%}
+      </select>
+    </div>
+    <br/>
+    <button type="submit"  name="list_event" value="list_event" class="btn btn-primary">List events</button>
+</form>
+<br>
+{% if outputeventname!=[]%}
+	{% for k in range(outputeventlen)%}
+		<div class=>
+  			<div class="container">
+    			<h1 class="display-4">Event :{{outputeventname[k]}}</h1>
+    			<p class="lead">Date : {{outputeventdate[k]}}</p>
+  			</div>
+		</div>
+	{%endfor%}
+{%elif outputeventname==[]%}
+	<div class=>
+  			<div class="container">
+    			<h1 class="display-4">No event</h1>
+  			</div>
+		</div>
+{%else%}
+	<div class=>
+  			<div class="container">
+
+  			</div>
+		</div>
+{%endif%}
+<br>
+
+<!-- ------------------------------------------------EVENT LIST----------------------------------------------------- -->
+<br>
+<form method="POST">
+    <br>
+    <h3 align="center">Delete old events</h3>
+	<div class="form-group">
+    </div>
+    <br/>
+    <button type="submit"  name="delete_oldevents" value="delete_oldevents" class="btn btn-primary">Delete old events</button>
+</form>
+<!-- ---------------------------------------------------DELETE ALL OLD EVENTS-------------------------------------------------- -->
+
+<h3 align="center">Maried</h3>
+  <div class=>
+  			<div class="container">
+				{% for l in inmariage%}
+				<p class="lead">Name : {{l}}</p>
+    			{%endfor%}
+  			</div>
+		</div>
+<br>
+
+<!-- -----------------------------------------------------PRINT ALL MERIED PEOPLE------------------------------------------------ -->
+<br>
+<form method="POST">
+    <br>
+    <h3 align="center">Adding marriage</h3>
+	<div class="form-group">
+      <label for="sel1">Select first person</label>
+      <select class="form-control" name="firstperson">
+		  <option value="" disabled selected hidden>Choose person</option>
+		  {%for j in listofperson%}
+		  <option>{{j}}</option>
+		  {%endfor%}
+      </select>
+    </div>
+	<div class="form-group">
+      <label for="sel1">Select second person</label>
+      <select class="form-control" name="secondperson">
+		  <option value="" disabled selected hidden>Choose person</option>
+		  {%for j in listofperson%}
+		  <option>{{j}}</option>
+		  {%endfor%}
+      </select>
+    </div>
+	<div class="form-group">
+        <label for="marriage_date">Wedding date</label>
+        <input
+        type="date"
+        class="form-control"
+        id="marriage_date"
+        name="marriage_date"
+        />
+    </div>
+    <br/>
+    <button type="submit"  name="addmarriage" value="addmarriage" class="btn btn-primary">Add</button>
+</form>
+<!-- -----------------------------------------------ADD MARRIAGE------------------------------------------------------ -->
+<br>
+<br>
+<form method="POST">
+    <br>
+    <h3 align="center">Modify mariage </h3>
+	<div class="form-group">
+      <label for="mariage_id">Mariage id</label>
+        <input
+        type="number"
+        class="form-control"
+        id="mariage_id"
+        name="mariage_id"
+        placeholder="Enter relationship id"
+        />
+    </div>
+	<div class="form-group">
+      <select class="form-control" id="sel2" name="status">
+        <option value="1">Still going</option>
+        <option value="0">Broken</option>
+      </select>
+    </div>
+    <br/>
+    <button type="submit"  name="modify_mariage" value="modify_mariage" class="btn btn-primary">Modify</button>
+</form>
+
+<!-- -----------------------------------------------------MODIFY MARRIAGE------------------------------------------------ -->
+<h3 align="center">Next wedding anniversary</h3>
+  <div class=>
+  			<div class="container">
+    			<h1 class="display-4">Event :{{nextweddinganniversary[0]}}</h1>
+				<p class="lead">By : {{nextweddinganniversary[1]}}</p>
+    			<p class="lead">Date : {{nextweddinganniversary[2]}}</p>
+  			</div>
+		</div>
+<br>
+
+<!-- -----------------------------------------------NEXT WEDDING PARTY------------------------------------------------------ -->
+<br>
+<form method="POST">
+    <br>
+    <h3 align="center">Create relationship </h3>
+	<div class="form-group">
+      <label for="sel1">Select first person (select one):</label>
+      <select class="form-control" name="firstperson">
+		{%for j in listofperson%}
+        <option>{{j}}</option>
+        {%endfor%}
+      </select>
+    </div>
+	<div class="form-group">
+      <label for="sel1">Select second person (select one):</label>
+      <select class="form-control" name="secondperson">
+		{%for j in listofperson%}
+        <option>{{j}}</option>
+        {%endfor%}
+      </select>
+    </div>
+	<div class="form-group">
+        <label for="relationship_name">Relationship name</label>
+        <input
+        type="text"
+        class="form-control"
+        id="relationship_name"
+        name="relationship_name"
+        placeholder="Enter relationship name"
+        />
+    </div>
+    <br/>
+    <button type="submit"  name="create_relationship" value="create_relationship" class="btn btn-primary">Create</button>
+</form>
+<!-- -------------------------------------------CREATE RELATIONSHIP---------------------------------------------------------- -->
+<br>
+<form method="POST">
+    <br>
+    <h3 align="center">Delete relationship</h3>
+	<div class="form-group">
+        <label for="relationship_id">Relationship id</label>
+        <input
+        type="number"
+        class="form-control"
+        id="relationship_id"
+        name="relationship_id"
+        placeholder="Enter relationship id"
+        />
+    </div>
+    <br/>
+    <button type="submit"  name="delete_relationship" value="delete_relationship" class="btn btn-primary">Delete relationship</button>
+</form>
+<!-- --------------------------------------------------------DELETE RELATIONSHIP--------------------------------------------- -->
+
+<br>
+<form method="POST">
+    <br>
+    <h3 align="center">Relationship list by person</h3>
+	<div class="form-group">
+      <label for="sel3">Select person (select one):</label>
+		<select class="form-control" id="sel3" name="relshipperson">
+			<option value="" disabled selected hidden>Choose person</option>
+			{%for j in listofperson%}
+        	<option>{{j}}</option>
+        	{%endfor%}
+      </select>
+    </div>
+    <br/>
+    <button type="submit"  name="list_relationship" value="list_relationship" class="btn btn-primary">List relationship</button>
+</form>
+<br>
+{% if outputrelpers!=[]%}
+	{% for k in range(outputrellen)%}
+		<div class=>
+  			<div class="container">
+    			<h1 class="display-4">With :{{outputrelpers[k]}}</h1>
+    			<p class="lead">relationship : {{outputrelname[k]}}</p>
+  			</div>
+		</div>
+	{%endfor%}
+{%elif outputeventname==[]%}
+	<div class=>
+  			<div class="container">
+    			<h1 class="display-4">No relationship</h1>
+  			</div>
+		</div>
+{%else%}
+	<div class=>
+  			<div class="container">
+
+  			</div>
+		</div>
+{%endif%}
+<br>
+
+<!-- ------------------------------------------------RELATIONSHIP LIST----------------------------------------------------- -->
+<form method="POST">
+    <br>
+    <h3 align="center">Family tree by person </h3>
+	<div class="form-group">
+      <label for="sel1">Select person (select one):</label>
+      <select class="form-control" name="person">
+		{%for j in listofperson%}
+        <option>{{j}}</option>
+        {%endfor%}
+      </select>
+    </div>
+    <br/>
+    <button type="submit"  name="family_tree" value="family_tree" class="btn btn-primary">Draw tree</button>
+</form>
+<br>
+{% if persondraw!=[]%}
+<div class="tree">
+	<ul class="mainul">
+		<li>
+			<a href="#">{{persondraw[0]}}</a>
+			<ul>
+				<li>
+					<a href="#">{{persondraw[1]}}</a>
+					<ul>
+						<li>
+							<a href="#">{{persondraw[3]}}</a>
+							<ul>
+								<li>
+									<a href="#">{{persondraw[7]}}</a>
+								</li>
+								<li>
+									<a href="#">{{persondraw[8]}}</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">{{persondraw[4]}}</a>
+							<ul>
+								<li>
+									<a href="#">{{persondraw[9]}}</a>
+								</li>
+								<li>
+									<a href="#">{{persondraw[10]}}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="#">{{persondraw[2]}}</a>
+					<ul>
+						<li>
+							<a href="#">{{persondraw[5]}}</a>
+							<ul>
+								<li>
+									<a href="#">{{persondraw[11]}}</a>
+								</li>
+								<li>
+									<a href="#">{{persondraw[12]}}</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="#">{{persondraw[6]}}</a>
+							<ul>
+								<li>
+									<a href="#">{{persondraw[13]}}</a>
+								</li>
+								<li>
+									<a href="#">{{persondraw[14]}}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+<hr>
+{% endif %}
+
+
+<br>
+<br>
+{% endblock %}
